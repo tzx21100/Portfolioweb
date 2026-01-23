@@ -48,6 +48,16 @@ const projects = [
 		details: "Particularly happy with how this game turned out. Not very happy with how the school misspelt my name. Did most of the game scripting in here and all the audio that can be found has been mixed/made/open sourced. You can find it here where they spelt my name wrong :< ",
 		links: [{ href: "https://www.digipen.edu.sg/showcase/student-games/fragments", label: "GAME LINK" }],
 	},
+	{
+		key: "Tarrot's Fate",
+		title: "Tarrot's Fate (3D Action Souls-like)",
+		desc: "Game built using the Invenio Engine, featuring a very nice souls-like combat.",
+		tags: ["C#", "C++ behaviour trees", "Audio Creation", "Audio"],
+		images: [BASE + "/images/tf1.png", BASE + "/images/tf2.png" , BASE + "/images/tf3.png"],
+		videos: [],
+		details: "Happy with how this game turned out. Did most of the audio design and creation here. Main job was to build tools to support the designers to create nice levels and encounters. Worked in a group of 12 people to create this game alongside with the game engine. ",
+		links: [{ href: "https://www.digipen.edu.sg/showcase/student-games/fragments", label: "GAME LINK" }],
+	},
 ]
 
 export default function App() {
@@ -193,13 +203,13 @@ export default function App() {
 					<div className="stack">
 						<div className="row">
 							<div>
-								<h3>VentiTech — Intern</h3>
+								<h3>VentiTech — Simulation Engineer Intern</h3>
 								<p>
 									AV simulation pipelines, tooling, scenario generation,
 									performance analysis.
 								</p>
 							</div>
-							<span className="muted">202x</span>
+							<span className="muted">2025-2026</span>
 						</div>
 
 						<div className="row">
@@ -210,9 +220,18 @@ export default function App() {
 									debugging support.
 								</p>
 							</div>
-							<span className="muted">202x</span>
+							<span className="muted">2023-2024</span>
 						</div>
 					</div>
+						<div className="row">
+							<div>
+								<h3>OCBC — Fintech Intern</h3>
+								<p>
+									Planned and organized events, promoted fintech products and services. Sourced
+								</p>
+							</div>
+							<span className="muted">2019</span>
+						</div>
 				</section>
 
 				<section id="contact">
