@@ -41,7 +41,7 @@ const projects = [
 	{
 		key: "Fragments",
 		title: "Fragments (2D Action Platformer)",
-		desc: "Game built using the Insight Engine, featuring fast-paced combat and intricate level design. Platforming with challegning level design.",
+		desc: "Game built using the Insight Engine, featuring fast-paced combat and intricate level design. Platforming with challenging level design.",
 		tags: ["C#", "Game Scripting", "Audio"],
 		images: [BASE + "/images/fragment1.png"],
 		videos: [BASE + "/videos/fragment1.mp4", BASE + "/videos/fragment2.mp4"],
