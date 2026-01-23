@@ -107,7 +107,7 @@ export default function App() {
 						</a>
 						<a
 							className="btn secondary"
-							href="Resume.pdf"
+							href="/Portfolioweb/Resume.pdf"
 							target="_blank"
 							rel="noreferrer"
 						>
