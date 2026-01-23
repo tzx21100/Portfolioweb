@@ -105,3 +105,25 @@ h2{margin-top:32px; margin-bottom:12px; font-size:20px}
 }
 /* subtle focus states for accessibility */
 a:focus, .btn:focus {outline:2px solid rgba(122,162,255,.18); outline-offset:3px}
+.project-scroll {
+  display: none;
+}
+.project-paged {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+@media (max-width: 1100px) {
+  .project-paged {
+    grid-template-columns: 1fr;
+  }
+}
+/* Hide scrollbars for all browsers (if any remain) */
+.project-paged {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.project-paged::-webkit-scrollbar {
+  display: none;
+}
