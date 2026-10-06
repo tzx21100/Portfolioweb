@@ -131,7 +131,9 @@ img, video { display: block; max-width: 100%; }
 .locail-card-media:hover img { transform: translateY(-4px); }
 .release-badge { display: flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: .08em; color: var(--accent); }
 .locail-download-link { margin-top: 16px; }
-.locail-mark { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--accent); border-radius: 9px; color: var(--accent); font-size: 26px; }
+.locail-mark { width: 36px; height: 36px; object-fit: contain; }
+.locail-card .project-content h3 { display: flex; align-items: center; gap: 14px; }
+.locail-card .project-content h3 img { width: 44px; height: 44px; object-fit: contain; }
 .locail-hero { display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 80px; padding-block: 90px 70px; }
 .locail-hero h1 { font: 500 clamp(56px,7vw,96px)/1.02 var(--display); letter-spacing: -.06em; margin: 25px 0; }
 .locail-hero h1 span { color: var(--accent); }

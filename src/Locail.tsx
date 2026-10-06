@@ -30,7 +30,7 @@ export default function Locail() {
       <div className="ambient ambient-one" />
       <header className="site-header">
         <nav className="nav container" aria-label="Locail navigation">
-          <a className="logo" href="#/locail" aria-label="Locail home"><span className="locail-mark" aria-hidden="true">⌕</span><span>Locail</span></a>
+          <a className="logo" href="#/locail" aria-label="Locail home"><img className="locail-mark" src={BASE + "images/locail/icon.png"} alt="" /><span>Locail</span></a>
           <div className="links"><a href="#ai">← Portfolio</a><a href={DOWNLOAD} target="_blank" rel="noreferrer">Get Locail ↗</a></div>
         </nav>
       </header>

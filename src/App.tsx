@@ -56,6 +56,11 @@ export default function App() {
 
   useEffect(() => {
     document.title = isLocail ? "Locail — Private, local file search for Windows" : "Tan Zheng Xun — Games, Systems & AI"
+    const favicon = document.querySelector<HTMLLinkElement>('link[rel="icon"]')
+    if (favicon) {
+      favicon.href = BASE + (isLocail ? "/images/locail/icon.png" : "/favicon.ico")
+      favicon.type = isLocail ? "image/png" : "image/x-icon"
+    }
     document.querySelector('meta[name="description"]')?.setAttribute("content", isLocail
       ? "Find files in your own folders with Locail. Private Windows file search with optional image recognition and local AI. Available on itch.io."
       : "Portfolio of Tan Zheng Xun: game engines, gameplay systems, simulation tooling, and local AI software.")
@@ -146,7 +151,7 @@ export default function App() {
           <div className="category-heading ai-heading" id="ai"><div><p className="section-kicker">02 / AI</p><h3>Useful intelligence, locally.</h3></div><p>Software that brings local AI into everyday workflows.</p></div>
           <article className="project-card locail-card">
             <a className="locail-card-media" href="#/locail" aria-label="Explore Locail"><span className="release-badge"><span className="status-dot" /> Available on Windows</span><img src={BASE + "/images/locail/results.png"} alt="Locail search window showing matching files" loading="lazy" /></a>
-            <div className="project-content"><p className="project-category">Local search · Optional AI</p><h3>Locail</h3><p className="project-description">Find the files you remember, even when their names escape you. Private folder search with optional image recognition and your own local AI model.</p><ul className="tags"><li>Windows</li><li>Local AI</li><li>File indexing</li><li>Image recognition</li></ul><a className="details-button" href="#/locail">Explore Locail <span aria-hidden="true">↗</span></a><a className="text-link locail-download-link" href="https://tzx8787.itch.io/locail" target="_blank" rel="noreferrer">Download on itch.io ↗</a></div>
+            <div className="project-content"><p className="project-category">Local search · Optional AI</p><h3><img src={BASE + "/images/locail/icon.png"} alt="" />Locail</h3><p className="project-description">Find the files you remember, even when their names escape you. Private folder search with optional image recognition and your own local AI model.</p><ul className="tags"><li>Windows</li><li>Local AI</li><li>File indexing</li><li>Image recognition</li></ul><a className="details-button" href="#/locail">Explore Locail <span aria-hidden="true">↗</span></a><a className="text-link locail-download-link" href="https://tzx8787.itch.io/locail" target="_blank" rel="noreferrer">Download on itch.io ↗</a></div>
           </article>
         </section>
 
