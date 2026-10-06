@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
+import Locail from "./Locail"
 
-const BASE = "/Portfolioweb"
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, "")
 
 const projects = [
   {
@@ -40,11 +41,30 @@ type Popup = { type: "img" | "video"; src: string } | null
 
 export default function App() {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({})
-  const [page, setPage] = useState(0)
+  const [route, setRoute] = useState(window.location.hash)
   const [popup, setPopup] = useState<Popup>(null)
-  const cardsPerPage = 3
-  const maxPage = Math.max(0, Math.ceil(projects.length / cardsPerPage) - 1)
-  const visibleProjects = projects.slice(page * cardsPerPage, page * cardsPerPage + cardsPerPage)
+  const isLocail = route.startsWith("#/locail")
+
+  useEffect(() => {
+    const navigate = () => {
+      setRoute(window.location.hash)
+      setPopup(null)
+    }
+    window.addEventListener("hashchange", navigate)
+    return () => window.removeEventListener("hashchange", navigate)
+  }, [])
+
+  useEffect(() => {
+    document.title = isLocail ? "Locail — Private, local file search for Windows" : "Tan Zheng Xun — Games, Systems & AI"
+    document.querySelector('meta[name="description"]')?.setAttribute("content", isLocail
+      ? "Find files in your own folders with Locail. Private Windows file search with optional image recognition and local AI. Available on itch.io."
+      : "Portfolio of Tan Zheng Xun: game engines, gameplay systems, simulation tooling, and local AI software.")
+  }, [isLocail])
+
+  useEffect(() => {
+    if (isLocail) window.scrollTo({ top: 0, behavior: "instant" })
+    else document.getElementById(route.slice(1))?.scrollIntoView({ behavior: "instant" })
+  }, [route, isLocail])
 
   useEffect(() => {
     if (!popup) return
@@ -58,6 +78,8 @@ export default function App() {
   }, [popup])
 
   const toggleExpand = (key: string) => setExpanded((current) => ({ ...current, [key]: !current[key] }))
+
+  if (isLocail) return <Locail />
 
   return (
     <>
@@ -73,8 +95,8 @@ export default function App() {
         <section className="hero container" id="top">
           <div className="hero-copy">
             <p className="eyebrow"><span className="status-dot" /> Available for new opportunities</p>
-            <h1>I build systems that make <span>great games possible.</span></h1>
-            <p className="hero-description">I’m Tan Zheng Xun, a C++ systems developer focused on game engines, simulation tooling, and thoughtful developer experiences.</p>
+            <h1>I build systems for <span>games and everyday tools.</span></h1>
+            <p className="hero-description">I’m Tan Zheng Xun, a systems developer working across game engines, simulation tooling, and local AI software.</p>
             <div className="cta">
               <a className="btn" href="#projects">Explore my work <span aria-hidden="true">↓</span></a>
               <a className="btn secondary" href="https://github.com/tzx21100" target="_blank" rel="noreferrer">GitHub ↗</a>
@@ -85,26 +107,23 @@ export default function App() {
             <span className="aside-label">Core disciplines</span>
             <div><strong>Engine Architecture</strong><span>Scalable, data-oriented systems</span></div>
             <div><strong>Graphics &amp; Tools</strong><span>Rendering and editor workflows</span></div>
-            <div><strong>Gameplay Systems</strong><span>Responsive, extensible mechanics</span></div>
+            <div><strong>Local AI &amp; Simulation</strong><span>Practical tools, thoughtful workflows</span></div>
           </div>
         </section>
 
         <section className="section container" id="projects">
           <div className="section-heading">
             <div><p className="section-kicker">Selected work</p><h2>Projects with depth.</h2></div>
-            <div className="pagination" aria-label="Project pages">
-              <button className="icon-button" onClick={() => setPage((p) => Math.max(0, p - 1))} disabled={page === 0} aria-label="Previous projects">←</button>
-              <span><strong>{String(page + 1).padStart(2, "0")}</strong> / {String(maxPage + 1).padStart(2, "0")}</span>
-              <button className="icon-button" onClick={() => setPage((p) => Math.min(maxPage, p + 1))} disabled={page === maxPage} aria-label="Next projects">→</button>
-            </div>
+            <nav className="project-categories" aria-label="Project categories"><a href="#games">Games <span>04</span></a><a href="#ai">AI <span>01</span></a></nav>
           </div>
+          <div className="category-heading" id="games"><div><p className="section-kicker">01 / Games</p><h3>Engines &amp; experiences.</h3></div><p>Custom engines, development tools, and the games built with them.</p></div>
           <div className="project-list">
-            {visibleProjects.map((project, index) => {
+            {projects.map((project, index) => {
               const isExpanded = !!expanded[project.key]
               return (
                 <article className={`project-card ${isExpanded ? "expanded" : ""}`} key={project.key}>
                   <button className="project-media" onClick={() => setPopup({ type: "img", src: project.images[0] })} aria-label={`Open ${project.title} preview`}>
-                    <img src={project.images[0]} alt="" /><span className="project-number">0{page * cardsPerPage + index + 1}</span><span className="media-action">View image ↗</span>
+                    <img src={project.images[0]} alt="" loading="lazy" /><span className="project-number">0{index + 1}</span><span className="media-action">View image ↗</span>
                   </button>
                   <div className="project-content">
                     <p className="project-category">{project.category}</p><h3>{project.title}</h3><p className="project-description">{project.desc}</p>
@@ -124,6 +143,11 @@ export default function App() {
               )
             })}
           </div>
+          <div className="category-heading ai-heading" id="ai"><div><p className="section-kicker">02 / AI</p><h3>Useful intelligence, locally.</h3></div><p>Software that brings local AI into everyday workflows.</p></div>
+          <article className="project-card locail-card">
+            <a className="locail-card-media" href="#/locail" aria-label="Explore Locail"><span className="release-badge"><span className="status-dot" /> Available on Windows</span><img src={BASE + "/images/locail/results.png"} alt="Locail search window showing matching files" loading="lazy" /></a>
+            <div className="project-content"><p className="project-category">Local search · Optional AI</p><h3>Locail</h3><p className="project-description">Find the files you remember, even when their names escape you. Private folder search with optional image recognition and your own local AI model.</p><ul className="tags"><li>Windows</li><li>Local AI</li><li>File indexing</li><li>Image recognition</li></ul><a className="details-button" href="#/locail">Explore Locail <span aria-hidden="true">↗</span></a><a className="text-link locail-download-link" href="https://tzx8787.itch.io/locail" target="_blank" rel="noreferrer">Download on itch.io ↗</a></div>
+          </article>
         </section>
 
         <section className="section container" id="experience">
